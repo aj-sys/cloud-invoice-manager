@@ -99,7 +99,6 @@ The project demonstrates how multiple AWS services can work together to deliver 
 
 ## Project Structure
 
-```text
 cloud-invoice-manager/
 ├── .vscode/
 │   └── settings.json
@@ -108,8 +107,7 @@ cloud-invoice-manager/
 ├── backend/
 │   └── lambda/
 │       └── handler.py
-├── demo/
-│   └── (demonstration files)
+├── demo/                         # Reserved for the project demonstration video
 ├── docs/
 │   ├── screenshots/
 │   ├── architecture-decisions.md
@@ -135,7 +133,6 @@ cloud-invoice-manager/
 │   └── test_handler.py
 ├── .gitignore
 └── README.md
-```
 
 The tree shows the main tracked project files. The `demo/` directory is included without assuming the names or contents of its individual files.
 
