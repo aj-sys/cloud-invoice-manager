@@ -1,0 +1,41 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform lock file should be committed
+# .terraform.lock.hcl
+
+# AWS credentials
+.aws/
+.env
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Deployment packages
+*.zip
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+@'
+
+# Additional sensitive and generated files
+invoice-key.json
+tfplan
+'@ | Add-Content .gitignore
