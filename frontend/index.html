@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Invoice Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <h2 class="logo">Cloud<span>Invoice</span></h2>
+
+            <nav>
+                <a href="#" class="active">Dashboard</a>
+                <a href="#invoices">Invoices</a>
+                <a href="#upload">Upload Invoice</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>Cloud Invoice Manager</p>
+                <small>Local Development Version</small>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Welcome back! Here's your invoice overview.</p>
+                </div>
+                <button class="upload-button" id="openFormButton">
+                    + Add Invoice
+                </button>
+            </header>
+
+            <section class="summary-cards">
+                <div class="card">
+                    <p>Total Invoices</p>
+                    <h2 id="totalInvoices">0</h2>
+                </div>
+                <div class="card">
+                    <p>Total Invoice Value</p>
+                    <h2 id="totalValue">GHS 0.00</h2>
+                </div>
+                <div class="card">
+                    <p>Paid Invoices</p>
+                    <h2 id="paidInvoices">0</h2>
+                </div>
+                <div class="card">
+                    <p>Pending Invoices</p>
+                    <h2 id="pendingInvoices">0</h2>
+                </div>
+            </section>
+
+            <section class="form-section" id="upload">
+                <div class="section-heading">
+                    <h2>Add New Invoice</h2>
+                    <p>Enter the invoice details below.</p>
+                </div>
+
+                <form id="invoiceForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="invoiceFile">Invoice document</label>
+                            <input
+                                type="file"
+                                id="invoiceFile"
+                                accept=".pdf,.png,.jpg,.jpeg"
+                                required
+                            >
+                            <small>PDF, PNG or JPG. Maximum 5 MB.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="supplier">Supplier name</label>
+                            <input
+                                type="text"
+                                id="supplier"
+                                placeholder="e.g. Accra Office Supplies"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amount">Invoice amount (GHS)</label>
+                            <input
+                                type="number"
+                                id="amount"
+                                min="0.01"
+                                max="100000000"
+                                step="0.01"
+                                placeholder="e.g. 1500.00"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="invoiceDate">Invoice date</label>
+                            <input type="date" id="invoiceDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Payment status</label>
+                            <select id="status" required>
+                                <option value="Pending">Pending</option>
+                                <option value="Paid">Paid</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="upload-button">
+                            Save Invoice
+                        </button>
+                        <button type="reset" class="cancel-button">
+                            Clear Form
+                        </button>
+                    </div>
+
+                    <p id="formMessage" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+
+            <section class="invoice-section" id="invoices">
+                <div class="section-heading">
+                    <h2>Recent Invoices</h2>
+                    <p>Keep track of your uploaded invoices.</p>
+                </div>
+
+                <div class="invoice-filters">
+                    <input
+                        type="text"
+                        id="searchInvoice"
+                        placeholder="Search by supplier or invoice ID..."
+                    />
+
+                    <select id="statusFilter">
+                        <option value="All">All statuses</option>
+                        <option value="Paid">Paid</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+
+                    <button
+                        type="button"
+                        id="clearFilters"
+                        class="cancel-button"
+                    >
+                        Clear Filters
+                    </button>
+                </div>
+
+                <p id="invoiceCount" class="invoice-count"></p>
+
+                <div class="table-container">
+                    <table>
+                       <thead>
+    <tr>
+        <th>Invoice ID</th>
+        <th>Supplier</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Document</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+                        <tbody id="invoiceTable"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <footer>
+                <p>Cloud Invoice Manager &copy; 2026</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
