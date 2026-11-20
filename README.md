@@ -1,26 +1,35 @@
 # Cloud Invoice Manager
 
-A serverless invoice management application built on AWS using Python, AWS Lambda, API Gateway, DynamoDB, and Amazon S3. The project demonstrates practical cloud development, infrastructure automation with Terraform, serverless application deployment, file storage, security configuration, and monitoring.
+A serverless invoice management application built on Amazon Web Services (AWS) using Python, AWS Lambda, API Gateway, DynamoDB, and Amazon S3.
+
+This project demonstrates practical cloud development, Infrastructure as Code (IaC) with Terraform, serverless application deployment, document storage, IAM security configuration, and application monitoring.
 
 - **Project status:** Deployed and tested
 - **Cloud provider:** Amazon Web Services (AWS)
-**Region:** `us-east-1`
+- **AWS region:** `us-east-1`
 
 ## Live Demo
 
 [Open Cloud Invoice Manager](http://cloud-invoice-manager-dev-website-881490105230.s3-website-us-east-1.amazonaws.com)
 
-> The demo is hosted using the Amazon S3 static website endpoint, which uses HTTP. It is intended for demonstration purposes and does not include user authentication. Use fictional invoice information only.
+> **Demo notice:** The application is hosted using an Amazon S3 static website endpoint, which uses HTTP. It is intended for demonstration purposes and does not include user authentication. Use fictional invoice information only.
 
 ## Project Overview
 
-Cloud Invoice Manager provides a simple web interface for managing invoice records and their supporting documents.
+Cloud Invoice Manager provides a web interface for managing invoice records and their supporting documents.
 
-The application allows users to create, view, search, filter, edit, and delete invoices. Invoice documents are uploaded to a private Amazon S3 bucket, while invoice metadata is stored in Amazon DynamoDB.
+Users can:
 
-The backend is implemented with AWS Lambda and exposed through Amazon API Gateway. The infrastructure is provisioned using Terraform.
+- Create and view invoices.
+- Search and filter invoice records.
+- Edit and delete invoices.
+- Upload and download supporting invoice documents.
 
-The project was developed to demonstrate how AWS services can work together to deliver a practical, serverless application.
+Invoice metadata is stored in Amazon DynamoDB, while supporting documents are stored in a separate private Amazon S3 bucket.
+
+The Python backend runs on AWS Lambda and is exposed through Amazon API Gateway. Terraform is used to provision and manage the cloud infrastructure.
+
+The project demonstrates how multiple AWS services can work together to deliver a practical serverless application.
 
 ## Architecture
 
@@ -31,27 +40,27 @@ The project was developed to demonstrate how AWS services can work together to d
 1. A user interacts with the web application hosted in an Amazon S3 static website bucket.
 2. The frontend sends HTTP requests to Amazon API Gateway.
 3. API Gateway invokes the AWS Lambda function.
-4. Lambda processes the request and interacts with Amazon DynamoDB to manage invoice metadata.
-5. Invoice documents are stored in a separate private Amazon S3 bucket.
-6. Lambda generates pre-signed S3 URLs for secure document uploads and downloads.
-7. Amazon CloudWatch collects Lambda logs for monitoring and troubleshooting.
+4. Lambda processes requests and interacts with DynamoDB to manage invoice metadata.
+5. Invoice documents are stored in a separate private S3 bucket.
+6. Lambda generates pre-signed S3 URLs for temporary document uploads and downloads.
+7. Amazon CloudWatch collects Lambda execution logs for monitoring and troubleshooting.
 
 ### AWS Services Used
 
-| AWS Service | Purpose |
+| Service | Purpose |
 |---|---|
 | Amazon S3 | Hosts the frontend website and stores invoice documents in a separate private bucket |
 | AWS Lambda | Runs the Python serverless backend |
 | Amazon API Gateway | Exposes HTTP endpoints for frontend-to-backend communication |
 | Amazon DynamoDB | Stores invoice metadata |
 | AWS IAM | Controls permissions for Lambda access to AWS resources |
-| Amazon CloudWatch | Collects application logs |
-| Terraform | Provisions and manages the AWS infrastructure |
+| Amazon CloudWatch | Collects application execution logs |
+| Terraform | Provisions and manages AWS infrastructure |
 
 ## Application Features
 
 - **Dashboard:** Displays invoice information and summary metrics.
-- **Create invoices:** Adds invoice details and uploads supporting documents.
+- **Create invoices:** Adds invoice details and supporting documents.
 - **View invoices:** Retrieves and displays saved invoice records.
 - **Search and filter:** Helps users find invoices using available fields and status filters.
 - **Edit invoices:** Updates existing invoice information.
@@ -82,7 +91,7 @@ The project was developed to demonstrate how AWS services can work together to d
 - Terraform
 
 **Testing and Development**
-- Python unittest
+- Python `unittest`
 - Node.js syntax checking
 - AWS CLI
 - Visual Studio Code
@@ -92,40 +101,43 @@ The project was developed to demonstrate how AWS services can work together to d
 
 ```text
 cloud-invoice-manager/
-â”‚
-â”œâ”€â”€ architecture/
-â”‚   â””â”€â”€ cloud-invoice-architecture.png
-â”‚
-â”œâ”€â”€ backend/
-â”‚   â””â”€â”€ lambda/
-â”‚       â””â”€â”€ handler.py
-â”‚
-â”œâ”€â”€ frontend/
-â”‚   â”œâ”€â”€ index.html
-â”‚   â”œâ”€â”€ styles.css
-â”‚   â””â”€â”€ app.js
-â”‚
-â”œâ”€â”€ infrastructure/
-â”‚   â”œâ”€â”€ main.tf
-â”‚   â”œâ”€â”€ variables.tf
-â”‚   â”œâ”€â”€ outputs.tf
-â”‚   â””â”€â”€ ...
-â”‚
-â”œâ”€â”€ tests/
-â”‚   â””â”€â”€ test_handler.py
-â”‚
-â”œâ”€â”€ docs/
-â”‚   â”œâ”€â”€ screenshots/
-â”‚   â”œâ”€â”€ architecture-decisions.md
-â”‚   â”œâ”€â”€ implementation-guide.md
-â”‚   â”œâ”€â”€ security-and-iam.md
-â”‚   â””â”€â”€ testing-and-troubleshooting.md
-â”‚
-â”œâ”€â”€ .gitignore
-â””â”€â”€ README.md
+├── .vscode/
+│   └── settings.json
+├── architecture/
+│   └── cloud-invoice-architecture.png
+├── backend/
+│   └── lambda/
+│       └── handler.py
+├── demo/
+│   └── (demonstration files)
+├── docs/
+│   ├── screenshots/
+│   ├── architecture-decisions.md
+│   ├── implementation-guide.md
+│   ├── security-and-iam.md
+│   └── testing-and-troubleshooting.md
+├── frontend/
+│   ├── index.html
+│   ├── styles.css
+│   └── app.js
+├── infrastructure/
+│   ├── .terraform.lock.hcl
+│   ├── api_gateway.tf
+│   ├── dynamodb.tf
+│   ├── frontend.tf
+│   ├── iam.tf
+│   ├── lambda.tf
+│   ├── outputs.tf
+│   ├── providers.tf
+│   ├── s3.tf
+│   └── variables.tf
+├── tests/
+│   └── test_handler.py
+├── .gitignore
+└── README.md
 ```
 
-*The structure above highlights the main project files. Additional Terraform configuration and supporting files may also be present.*
+The tree shows the main tracked project files. The `demo/` directory is included without assuming the names or contents of its individual files.
 
 ## API Endpoints
 
@@ -139,7 +151,7 @@ The backend exposes the following HTTP routes:
 | POST | `/invoices` | Create an invoice |
 | PUT | `/invoices/{id}` | Update an invoice |
 | GET | `/invoices/{id}/download-url` | Generate a document download URL |
-| DELETE | `/invoices/{id}` | Delete an invoice and its document |
+| DELETE | `/invoices/{id}` | Delete an invoice and its associated document |
 
 ## Infrastructure Deployment
 
@@ -147,7 +159,7 @@ The AWS infrastructure is managed using Terraform.
 
 ### Prerequisites
 
-Before deploying, install and configure:
+Install and configure:
 
 - AWS CLI
 - Terraform
@@ -156,22 +168,22 @@ Before deploying, install and configure:
 
 You also need an AWS account and an IAM identity with permissions to create and manage the resources defined in the Terraform configuration.
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/aj-sys/cloud-invoice-manager.git
 cd cloud-invoice-manager
 ```
 
-### 2. Configure AWS credentials
+### 2. Configure AWS Credentials
 
-Configure your AWS CLI credentials using your own IAM identity:
+Configure the AWS CLI using your own IAM identity:
 
 ```bash
 aws configure
 ```
 
-Do not commit AWS access keys, secret keys, session tokens, or other credentials to GitHub.
+Never commit AWS access keys, secret keys, session tokens, or other credentials to GitHub.
 
 ### 3. Initialise Terraform
 
@@ -180,29 +192,29 @@ cd infrastructure
 terraform init
 ```
 
-### 4. Validate the configuration
+### 4. Validate the Configuration
 
 ```bash
 terraform validate
 ```
 
-### 5. Review the deployment plan
+### 5. Review the Deployment Plan
 
 ```bash
 terraform plan
 ```
 
-Review the proposed changes carefully before deployment.
+Review the proposed infrastructure changes carefully before deployment.
 
-### 6. Deploy the infrastructure
+### 6. Deploy the Infrastructure
 
 ```bash
 terraform apply
 ```
 
-Confirm the deployment only after reviewing the plan and understanding the resources and potential AWS charges.
+Confirm deployment only after reviewing the plan and understanding the resources and potential AWS charges.
 
-### 7. View the deployment outputs
+### 7. View Deployment Outputs
 
 ```bash
 terraform output
@@ -249,11 +261,10 @@ The deployed application was tested for:
 - Invoice creation and retrieval.
 - Invoice editing.
 - Invoice deletion.
-- PDF document upload.
-- PDF document download.
+- PDF document upload and download.
 - DynamoDB metadata storage.
 - S3 document storage.
-- Removal of the associated S3 document after invoice deletion.
+- Removal of associated S3 documents after invoice deletion.
 - Lambda execution and CloudWatch logging.
 
 The application successfully completed the tested invoice-management workflows.
@@ -262,17 +273,15 @@ The application successfully completed the tested invoice-management workflows.
 
 Security controls were implemented with the project's demonstration scope in mind.
 
-### IAM permissions
+### IAM Permissions
 
 The Lambda execution role uses resource-scoped permissions for the DynamoDB table, invoice document objects in S3, and the Lambda CloudWatch log group.
 
-The application does not require administrator-level permissions for its normal execution.
+The application does not require administrator-level permissions for normal execution.
 
-### Private invoice document storage
+### Private Invoice Document Storage
 
-Invoice documents are stored in a separate private S3 bucket.
-
-The bucket has:
+Invoice documents are stored in a separate private S3 bucket with:
 
 - S3 Block Public Access enabled.
 - Server-side encryption using AES-256.
@@ -280,23 +289,23 @@ The bucket has:
 
 ### Pre-signed URLs
 
-Pre-signed URLs are used to allow temporary access to invoice documents without making the document bucket public.
+Pre-signed URLs provide temporary access to invoice documents without making the document bucket public.
 
-### CloudWatch logging
+### CloudWatch Logging
 
 Lambda execution logs are sent to CloudWatch Logs. The configured log retention period is 14 days.
 
-### Known security limitations
+### Known Security Limitations
 
 This is a portfolio demonstration, not a production-ready financial application.
 
 - The API currently has no user authentication or authorisation.
-- The API Gateway routes use `AuthorizationType NONE`.
+- API Gateway routes use `AuthorizationType NONE`.
 - The public website is hosted on an S3 website endpoint using HTTP.
 - The application is intended for fictional demonstration data only.
 - Production deployment would require authentication, appropriate user-level access controls, HTTPS delivery, stronger operational safeguards, and additional security testing.
 
-CORS configuration is not a substitute for API authentication.
+**CORS configuration is not a substitute for API authentication.**
 
 ## Screenshots and Evidence
 
@@ -346,14 +355,14 @@ The following screenshots document the application's development, deployment, an
 
 ![Hosted invoice download](docs/screenshots/19-hosted-invoice-download.png)
 
-## Documentation
+## Additional Documentation
 
 Additional project documentation is available in the `docs/` directory:
 
-- **[Architecture Decisions](docs/architecture-decisions.md):** Important design and implementation decisions.
-- **[Implementation Guide](docs/implementation-guide.md):** Project implementation details.
-- **[Security and IAM](docs/security-and-iam.md):** IAM permissions and security configuration.
-- **[Testing and Troubleshooting](docs/testing-and-troubleshooting.md):** Test procedures and troubleshooting notes.
+- [Architecture Decisions](docs/architecture-decisions.md) – Design and implementation decisions.
+- [Implementation Guide](docs/implementation-guide.md) – Project implementation details.
+- [Security and IAM](docs/security-and-iam.md) – IAM permissions and security configuration.
+- [Testing and Troubleshooting](docs/testing-and-troubleshooting.md) – Test procedures and troubleshooting notes.
 
 ## Key Learning Outcomes
 
@@ -390,10 +399,10 @@ Potential improvements for a production-oriented version include:
 
 **Ajara Amadu**
 
-Associate Cloud Trainer | AWS Certified | Cloud and DevOps Practitioner
+AWS Certified Solutions Architect – Associate | Cloud Trainer | Building Practical AWS and DevOps Projects
 
-- GitHub: [github.com/aj-sys](https://github.com/aj-sys)
-- LinkedIn: [Ajara Amadu](https://www.linkedin.com/in/ajara-amadu-profile/)
+- **GitHub:** [github.com/aj-sys](https://github.com/aj-sys)
+- **LinkedIn:** [Ajara Amadu](https://www.linkedin.com/in/ajara-amadu-profile/)
 
 ---
 
