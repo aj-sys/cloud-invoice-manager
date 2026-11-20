@@ -395,12 +395,16 @@ Potential improvements for a production-oriented version include:
 ## Author
 
 **Ajara Amadu**
-
 AWS Certified Solutions Architect – Associate | Cloud Trainer | Building Practical AWS and DevOps Projects
 
 - **GitHub:** [github.com/aj-sys](https://github.com/aj-sys)
 - **LinkedIn:** [Ajara Amadu](https://www.linkedin.com/in/ajara-amadu-profile/)
 
+## Project Demonstration
+
+Watch the walkthrough of the Cloud Invoice Manager application, including its features, AWS architecture, Terraform infrastructure and CloudWatch monitoring.
+
+[▶ Watch the Cloud Invoice Manager Demo](https://drive.google.com/file/d/18B0l_AN9mVVZ4AiFUNEj4GyPSIHHe6t5/view?usp=sharing)
 ---
 
 *Built as a practical AWS serverless and Infrastructure-as-Code portfolio project.*
